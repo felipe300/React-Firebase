@@ -8,7 +8,6 @@ const Navbar = () => {
   const handleLogOut = async () => {
     try {
       await signOutUser()
-      console.log('User logged out')
     } catch (err) {
       console.log(err.code)
     }

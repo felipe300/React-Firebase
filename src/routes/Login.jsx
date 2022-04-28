@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { UserContext } from '../context/UserProvider'
 
 const Login = () => {
-  const [email, setEmail] = useState('felipe300@test.com')
+  const [email, setEmail] = useState('felipe@dev.com')
   const [password, setPassword] = useState('123456')
 
   const { loginUser } = useContext(UserContext)
@@ -14,7 +14,6 @@ const Login = () => {
 
     try {
       await loginUser(email, password)
-      console.log('User logged in')
       navegate('/')
     } catch (err) {
       console.log(err.code)
