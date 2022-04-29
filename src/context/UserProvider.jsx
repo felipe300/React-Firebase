@@ -8,13 +8,11 @@ import { auth } from '../firebase'
 
 export const UserContext = createContext()
 
-function UserProvider({ children }) {
+function UserProvider ({ children }) {
   const [user, setUser] = useState(false)
 
   useEffect(() => {
     const unsuscribe = onAuthStateChanged(auth, (user) => {
-      console.log('User changed', user)
-
       if (user) {
         const { email, uid, photoUrl, displayName } = user.email
         setUser({ email, uid, photoUrl, displayName })
@@ -36,7 +34,8 @@ function UserProvider({ children }) {
 
   return (
     <UserContext.Provider
-      value={{ user, setUser, registerUser, loginUser, signOutUser }}>
+      value={{ user, setUser, registerUser, loginUser, signOutUser }}
+    >
       {children}
     </UserContext.Provider>
   )
