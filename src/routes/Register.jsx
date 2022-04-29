@@ -43,7 +43,7 @@ const Register = () => {
   return (
     <>
       <h2>Register</h2>
-      {<FormErrors err={errors.firebase} />}
+      <FormErrors err={errors.firebase} />
       <form onSubmit={handleSubmit(onSubmit)}>
         <FormInput
           type='email'
@@ -51,8 +51,9 @@ const Register = () => {
           {...register('email', {
             required,
             pattern: patternEmail
-          })}>
-          {<FormErrors err={errors.email} />}
+          })}
+        >
+          <FormErrors err={errors.email} />
         </FormInput>
         <FormInput
           type='password'
@@ -60,16 +61,18 @@ const Register = () => {
           {...register('password', {
             minLength,
             validate: validateTrim
-          })}>
-          {<FormErrors err={errors.password} />}
+          })}
+        >
+          <FormErrors err={errors.password} />
         </FormInput>
         <FormInput
           type='password'
           placeholder='password'
           {...register('repassword', {
             validate: validateEqualPasswords(getValues)
-          })}>
-          {<FormErrors err={errors.repassword} />}
+          })}
+        >
+          <FormErrors err={errors.repassword} />
         </FormInput>
         <button type='submit'>Register</button>
       </form>

@@ -10,6 +10,7 @@ import Register from './routes/Register'
 
 const App = () => {
   const { user } = useContext(UserContext)
+  // https://github.com/bluuweb/react-firebase9-router6-vite/blob/02-hook-form/src/routes/Register.jsx
 
   if (user === false) {
     return <p>LOADING...</p>

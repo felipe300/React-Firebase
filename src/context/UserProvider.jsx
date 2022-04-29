@@ -8,7 +8,7 @@ import { auth } from '../firebase'
 
 export const UserContext = createContext()
 
-function UserProvider({ children }) {
+function UserProvider ({ children }) {
   const [user, setUser] = useState(false)
 
   useEffect(() => {
@@ -34,7 +34,8 @@ function UserProvider({ children }) {
 
   return (
     <UserContext.Provider
-      value={{ user, setUser, registerUser, loginUser, signOutUser }}>
+      value={{ user, setUser, registerUser, loginUser, signOutUser }}
+    >
       {children}
     </UserContext.Provider>
   )

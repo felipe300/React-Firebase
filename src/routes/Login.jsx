@@ -39,7 +39,7 @@ const Login = () => {
   return (
     <>
       <h2>Login</h2>
-      {<FormErrors err={errors.firebase} />}
+      <FormErrors err={errors.firebase} />
       <form onSubmit={handleSubmit(onSubmit)}>
         <FormInput
           type='email'
@@ -47,8 +47,9 @@ const Login = () => {
           {...register('email', {
             required,
             pattern: patternEmail
-          })}>
-          {<FormErrors err={errors.email} />}
+          })}
+        >
+          <FormErrors err={errors.email} />
         </FormInput>
         <FormInput
           type='password'
@@ -56,8 +57,9 @@ const Login = () => {
           {...register('password', {
             minLength,
             validate: validateTrim
-          })}>
-          {<FormErrors err={errors.password} />}
+          })}
+        >
+          <FormErrors err={errors.password} />
         </FormInput>
         <button type='submit'>Login</button>
       </form>

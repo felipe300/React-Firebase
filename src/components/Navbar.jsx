@@ -15,17 +15,19 @@ const Navbar = () => {
 
   return (
     <div>
-      {user ? (
-        <>
-          <NavLink to='/'>Home</NavLink>
-          <button onClick={handleLogOut}>Logout</button>
-        </>
-      ) : (
-        <>
-          <NavLink to='/login'>Login</NavLink>
-          <NavLink to='/register'>Register</NavLink>
-        </>
-      )}
+      {user
+        ? (
+          <>
+            <NavLink to='/'>Home</NavLink>
+            <button onClick={handleLogOut}>Logout</button>
+          </>
+          )
+        : (
+          <>
+            <NavLink to='/login'>Login</NavLink>
+            <NavLink to='/register'>Register</NavLink>
+          </>
+          )}
     </div>
   )
 }

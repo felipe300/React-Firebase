@@ -28,7 +28,7 @@ export const formValidate = (getValues) => {
         return true
       }
     },
-    validateEqualPasswords(getValues) {
+    validateEqualPasswords (getValues) {
       return {
         equals: (v) => v === getValues('password') || 'Passwords do not match'
       }
