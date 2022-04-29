@@ -3,9 +3,18 @@ import { useNavigate } from 'react-router-dom'
 import { UserContext } from '../context/UserProvider'
 import { useForm } from 'react-hook-form'
 
+import { firebaseErrors } from '../utils/firebaseErrors'
+import { formValidate } from '../utils/formValidate'
+import FormErrors from '../components/FormErrors'
+import FormInput from '../components/FormInput'
+
 const Register = () => {
   const { registerUser } = useContext(UserContext)
   const navegate = useNavigate()
+
+  const { required, patternEmail, minLength, validateTrim, validateEqualPasswords } =
+    formValidate()
+
   const {
     register,
     handleSubmit,
@@ -25,68 +34,43 @@ const Register = () => {
       await registerUser(email, password)
       navegate('/')
     } catch (err) {
-      if (err.code === 'auth/email-already-in-use') {
-        setError('email', {
-          message: 'Email already in use'
-        })
-      }
-
-      if (err.code === 'auth/invalid-emai') {
-        setError('email', {
-          message: 'Invalid email'
-        })
-      }
+      setError('firebase', {
+        message: firebaseErrors(err.code)
+      })
     }
   }
 
   return (
     <>
       <h2>Register</h2>
+      {<FormErrors err={errors.firebase} />}
       <form onSubmit={handleSubmit(onSubmit)}>
-        <input
+        <FormInput
           type='email'
           placeholder='email'
           {...register('email', {
-            required: {
-              value: true,
-              message: 'Email is required'
-            },
-            pattern: {
-              value:
-                /[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})/,
-              message: 'Invalid email address'
-            }
-          })}
-        />
-        {errors.email && <span>{errors.email.message}</span>}
-        <input
+            required,
+            pattern: patternEmail
+          })}>
+          {<FormErrors err={errors.email} />}
+        </FormInput>
+        <FormInput
           type='password'
           placeholder='password'
           {...register('password', {
-            required: true,
-            minLength: {
-              value: 6,
-              message: 'Password must be at least 6 characters'
-            },
-            validate: {
-              trim: (v) => {
-                if (v.includes(' ')) return 'Password cannot have a whitespace'
-                true
-              }
-            }
-          })}
-        />
-        {errors.password && <span>{errors.password.message}</span>}
-        <input
+            minLength,
+            validate: validateTrim
+          })}>
+          {<FormErrors err={errors.password} />}
+        </FormInput>
+        <FormInput
           type='password'
           placeholder='password'
           {...register('repassword', {
-            validate: {
-              equals: (v) => v === getValues('password') || 'Passwords do not match'
-            }
-          })}
-        />
-        {errors.repassword && <span>{errors.repassword.message}</span>}
+            validate: validateEqualPasswords(getValues)
+          })}>
+          {<FormErrors err={errors.repassword} />}
+        </FormInput>
         <button type='submit'>Register</button>
       </form>
     </>
