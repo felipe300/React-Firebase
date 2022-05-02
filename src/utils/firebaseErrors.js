@@ -1,17 +1,17 @@
 export const firebaseErrors = (code) => {
   if (code === 'auth/email-already-in-use') {
-    return 'User already exists'
+    return { code: 'email', message: 'User already exists' }
   }
 
   if (code === 'auth/invalid-email') {
-    return 'Invalid email'
+    return { code: 'email', message: 'Invalid email' }
   }
 
   if (code === 'auth/user-not-found') {
-    return 'User not found'
+    return { code: 'email', message: 'User not found' }
   }
 
   if (code === 'auth/wrong-password') {
-    return 'Wrong password'
+    return { code: 'password', message: 'Wrong password' }
   }
 }

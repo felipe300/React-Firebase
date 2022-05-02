@@ -30,9 +30,8 @@ const Login = () => {
       await loginUser(email, password)
       navegate('/')
     } catch (err) {
-      setError('firebase', {
-        message: firebaseErrors(err.code)
-      })
+      const { code, message } = firebaseErrors(err)
+      setError(code, { message })
     }
   }
 
