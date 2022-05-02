@@ -34,7 +34,7 @@ const Register = () => {
       await registerUser(email, password)
       navegate('/')
     } catch (err) {
-      const { code, message } = firebaseErrors(err)
+      const { code, message } = firebaseErrors(err.code)
       setError(code, { message })
     }
   }
@@ -68,7 +68,7 @@ const Register = () => {
           type='password'
           placeholder='password'
           {...register('repassword', {
-            validate: validateEqualPasswords(getValues)
+            validate: validateEqualPasswords(getValues('password'))
           })}
         >
           <FormErrors err={errors.repassword} />

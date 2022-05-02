@@ -1,4 +1,4 @@
-export const formValidate = (getValues) => {
+export const formValidate = () => {
   return {
     required: {
       value: true,
@@ -28,9 +28,9 @@ export const formValidate = (getValues) => {
         return true
       }
     },
-    validateEqualPasswords (getValues) {
+    validateEqualPasswords (value) {
       return {
-        equals: (v) => v === getValues('password') || 'Passwords do not match'
+        equals: (v) => v === value || 'Passwords do not match'
       }
     }
   }
