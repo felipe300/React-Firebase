@@ -8,7 +8,7 @@ export const formValidate = () => {
       value: /[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})/,
       message: 'Invalid email'
     },
-    customLength: (min) => {
+    customLength (min) {
       return {
         minLength: {
           value: min,
