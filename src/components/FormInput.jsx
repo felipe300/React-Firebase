@@ -1,5 +1,5 @@
 import { forwardRef } from 'react'
-import { checkInput, checkLabel } from '../utils/errorClassName'
+import { checkInput, checkLabel } from '../utils/stylesClasses'
 
 const FormInput = forwardRef(
   ({ type, placeholder, onChange, onBlur, name, label, error, children }, ref) => {

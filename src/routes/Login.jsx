@@ -39,7 +39,7 @@ const Login = () => {
 
   return (
     <>
-      <Title title='Register' />
+      <Title title='Login' />
       <FormErrors err={errors.firebase} />
       <form onSubmit={handleSubmit(onSubmit)}>
         <FormInput

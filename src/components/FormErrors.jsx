@@ -1,5 +1,4 @@
 const FormErrors = ({ err }) => {
-  // <span className='font-medium'>{err.message}</span> Username already taken!
   return (
     <>
       {err &&
