@@ -7,6 +7,8 @@ import { firebaseErrors } from '../utils/firebaseErrors'
 import { formValidate } from '../utils/formValidate'
 import FormErrors from '../components/FormErrors'
 import FormInput from '../components/FormInput'
+import Title from '../components/Title'
+import Button from '../components/Button'
 
 const Register = () => {
   const { registerUser } = useContext(UserContext)
@@ -41,7 +43,7 @@ const Register = () => {
 
   return (
     <>
-      <h2>Register</h2>
+      <Title title='Register' />
       <FormErrors err={errors.firebase} />
       <form onSubmit={handleSubmit(onSubmit)}>
         <FormInput
@@ -51,6 +53,8 @@ const Register = () => {
             required,
             pattern: patternEmail
           })}
+          label='Email'
+          error={errors.email}
         >
           <FormErrors err={errors.email} />
         </FormInput>
@@ -61,6 +65,8 @@ const Register = () => {
             minLength,
             validate: validateTrim
           })}
+          label='Password'
+          error={errors.password}
         >
           <FormErrors err={errors.password} />
         </FormInput>
@@ -70,10 +76,12 @@ const Register = () => {
           {...register('repassword', {
             validate: validateEqualPasswords(getValues('password'))
           })}
+          label='Repeat Password'
+          error={errors.repassword}
         >
           <FormErrors err={errors.repassword} />
         </FormInput>
-        <button type='submit'>Register</button>
+        <Button type='submit' text='Register' />
       </form>
     </>
   )

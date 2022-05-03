@@ -1,10 +1,18 @@
 import { forwardRef } from 'react'
+import { checkInput, checkLabel } from '../utils/errorClassName'
 
 const FormInput = forwardRef(
-  ({ type, placeholder, onChange, onBlur, name, children }, ref) => {
+  ({ type, placeholder, onChange, onBlur, name, label, error, children }, ref) => {
     return (
-      <>
+      <div className='mb-6'>
+        <label
+          htmlFor='email'
+          className={`block mb-2 text-sm font-medium ${checkLabel(error)}`}
+        >
+          {label}
+        </label>
         <input
+          className={`text-sm rounded-lg block w-full p-2.5 ${checkInput(error)}`}
           type={type}
           placeholder={placeholder}
           ref={ref}
@@ -13,7 +21,7 @@ const FormInput = forwardRef(
           name={name}
         />
         {children}
-      </>
+      </div>
     )
   }
 )

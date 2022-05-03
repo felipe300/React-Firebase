@@ -1,5 +1,6 @@
 import { useContext } from 'react'
 import { Routes, Route } from 'react-router-dom'
+import LayoutContainer from './components/Layouts/LayoutContainer'
 import Navbar from './components/Navbar'
 import { UserContext } from './context/UserProvider'
 import RequiredAuth from './middlewares/RequiredAuth'
@@ -29,8 +30,10 @@ const App = () => {
             </RequiredAuth>
           }
         />
-        <Route path='/login' element={<Login />} />
-        <Route path='/register' element={<Register />} />
+        <Route path='/' element={<LayoutContainer />}>
+          <Route path='/login' element={<Login />} />
+          <Route path='/register' element={<Register />} />
+        </Route>
       </Routes>
     </>
   )

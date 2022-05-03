@@ -1,8 +1,10 @@
 import { useContext } from 'react'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
+import Button from '../components/Button'
 import FormErrors from '../components/FormErrors'
 import FormInput from '../components/FormInput'
+import Title from '../components/Title'
 import { UserContext } from '../context/UserProvider'
 import { firebaseErrors } from '../utils/firebaseErrors'
 import { formValidate } from '../utils/formValidate'
@@ -37,30 +39,34 @@ const Login = () => {
 
   return (
     <>
-      <h2>Login</h2>
+      <Title title='Register' />
       <FormErrors err={errors.firebase} />
       <form onSubmit={handleSubmit(onSubmit)}>
         <FormInput
+          label='Email'
           type='email'
           placeholder='email'
           {...register('email', {
             required,
             pattern: patternEmail
           })}
+          error={errors.email}
         >
           <FormErrors err={errors.email} />
         </FormInput>
         <FormInput
+          label='Password'
           type='password'
           placeholder='password'
           {...register('password', {
             minLength,
             validate: validateTrim
           })}
+          error={errors.password}
         >
           <FormErrors err={errors.password} />
         </FormInput>
-        <button type='submit'>Login</button>
+        <Button type='submit' text='Login' />
       </form>
     </>
   )
