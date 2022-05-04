@@ -9,7 +9,7 @@ import Navbar from './components/Navbar'
 
 import Home from './routes/Home'
 import Login from './routes/Login'
-import Perfil from './routes/Perfil'
+import Profile from './routes/Profile'
 import Register from './routes/Register'
 import NotFound from './routes/NotFount'
 
@@ -26,7 +26,7 @@ const App = () => {
       <Routes>
         <Route path='/' element={<LayoutRequiredAuth />}>
           <Route index element={<Home />} />
-          <Route path='/perfil' element={<Perfil />} />
+          <Route path='/Profile' element={<Profile />} />
         </Route>
 
         <Route path='/' element={<LayoutContainer />}>
