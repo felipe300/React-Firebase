@@ -1,5 +1,7 @@
 import { initializeApp } from 'firebase/app'
 import { getAuth } from 'firebase/auth'
+// check the hook and change 'firebase/firestore' to 'firebase/firestore/lite'
+import { getFirestore } from 'firebase/firestore'
 
 const firebaseConfig = {
   apiKey: 'AIzaSyBE5jtP6ngs_OA9pEbd-PY7Oium-s8PqhY',
@@ -12,5 +14,6 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig)
 const auth = getAuth(app)
+const db = getFirestore(app)
 
-export { auth }
+export { auth, db }
