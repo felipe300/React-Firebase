@@ -4,7 +4,7 @@ import Button from '../components/Button'
 import Title from '../components/Title'
 
 const Home = () => {
-  const { data, error, loading, addData, getData } = useFirestore()
+  const { data, error, loading, addData, getData, removeData } = useFirestore()
   const [text, setText] = useState('')
 
   useEffect(() => {
@@ -20,6 +20,10 @@ const Home = () => {
     setText('')
   }
 
+  const handleDeleteData = async (nanoid) => {
+    await removeData(nanoid)
+  }
+
   return (
     <>
       <Title title='Home' />
@@ -31,7 +35,7 @@ const Home = () => {
           value={text}
           onChange={(e) => setText(e.target.value)}
         />
-        <Button type='submit' text='Add Url' loading={loading.addData ? true : undefined} />
+        <Button type='submit' text='Add Url' loading={loading.addData ? true : undefined} color='blue' />
 
       </form>
       {
@@ -43,6 +47,7 @@ const Home = () => {
               <p>{uid}</p>
               <p>{url}</p>
               <p>{enabled ? 'TRUE' : 'FALSE'}</p>
+              <Button type='button' text='Remove Url' loading={loading.deleteData ? true : undefined} color='red' onClick={() => handleDeleteData(nanoid)} />
             </div>
           )
         })

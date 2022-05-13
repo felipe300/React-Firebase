@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { nanoid } from 'nanoid'
 
 import { auth, db } from '../src/firebase'
-import { collection, getDocs, query, where, setDoc, doc } from 'firebase/firestore'
+import { collection, getDocs, query, where, setDoc, doc, deleteDoc } from 'firebase/firestore'
 
 const useFirestore = () => {
   const [data, setData] = useState([])
@@ -37,15 +37,27 @@ const useFirestore = () => {
       await setDoc(docRef, newDoc)
       setData([...data, newDoc])
     } catch (err) {
-      console.log(err)
       setError(err.message)
     } finally {
       setLoading(prev => ({ ...prev, addData: false }))
     }
   }
 
+  const removeData = async (nanoid) => {
+    try {
+      setLoading(prev => ({ ...prev, deleteData: true }))
+      const docRef = doc(db, 'urls', nanoid)
+      await deleteDoc(docRef)
+      setData(data.filter(item => item.id !== nanoid))
+    } catch (err) {
+      setError(err.message)
+    } finally {
+      setLoading(prev => ({ ...prev, deleteData: false }))
+    }
+  }
+
   return {
-    data, error, loading, addData, getData
+    data, error, loading, addData, getData, removeData
   }
 }
 

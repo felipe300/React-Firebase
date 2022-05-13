@@ -6,8 +6,9 @@ const Button = (props) => {
 
   return (
     <button
+      onClick={props.onClick}
       {...props}
-      className={NavbarButtonStyle('blue')}
+      className={NavbarButtonStyle(props.color)}
     >
       {props.text}
     </button>
