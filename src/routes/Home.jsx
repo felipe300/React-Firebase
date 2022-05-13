@@ -4,8 +4,9 @@ import Button from '../components/Button'
 import Title from '../components/Title'
 
 const Home = () => {
-  const { data, error, loading, addData, getData, removeData } = useFirestore()
+  const { data, error, loading, addData, getData, removeData, updateData } = useFirestore()
   const [text, setText] = useState('')
+  const [newOrignId, setNewOriginId] = useState()
 
   useEffect(() => {
     getData()
@@ -16,12 +17,25 @@ const Home = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+
+    if (newOrignId) {
+      await updateData(newOrignId, text)
+      setNewOriginId('')
+      setText('')
+      return
+    }
     await addData(text)
     setText('')
   }
 
   const handleDeleteData = async (nanoid) => {
     await removeData(nanoid)
+  }
+
+  const handleUpdateData = async (nanoid, newUrl) => {
+    console.log(`updateData: ${nanoid} ${newUrl}`)
+    setText(newUrl)
+    setNewOriginId(nanoid)
   }
 
   return (
@@ -35,7 +49,9 @@ const Home = () => {
           value={text}
           onChange={(e) => setText(e.target.value)}
         />
-        <Button type='submit' text='Add Url' loading={loading.addData ? true : undefined} color='blue' />
+        {
+          newOrignId ? (<Button type='submit' text='Edit Url' loading={loading.updateData ? true : undefined} color='green' />) : (<Button type='submit' text='Add Url' loading={loading.addData ? true : undefined} color='blue' />)
+        }
 
       </form>
       {
@@ -48,6 +64,7 @@ const Home = () => {
               <p>{url}</p>
               <p>{enabled ? 'TRUE' : 'FALSE'}</p>
               <Button type='button' text='Remove Url' loading={loading.deleteData ? true : undefined} color='red' onClick={() => handleDeleteData(nanoid)} />
+              <Button type='button' text='Edit Url' loading={loading.updateData ? true : undefined} color='green' onClick={() => handleUpdateData(nanoid, origin)} />
             </div>
           )
         })

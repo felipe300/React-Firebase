@@ -32,7 +32,7 @@ const Navbar = () => {
                 <NavLink to='/profile' className={NavbarButtonStyle('blue')}>
                   Profile
                 </NavLink>
-                <button onClick={handleLogOut} className='focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 text-white focus:ring-red-300 bg-red-700 hover:bg-red-800 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800'>
+                <button onClick={handleLogOut} className={NavbarButtonStyle('red')}>
                   Logout
                 </button>
               </>
