@@ -1,16 +1,18 @@
 import { NavbarButtonStyle } from '../utils/stylesClasses'
+// import { checkColor } from '../utils/colorStyles'
 import LoadingButton from './ButtonLoading'
 
-const Button = (props) => {
-  if (props.loading) return <LoadingButton />
+const Button = ({ color = 'purple', loading, onClick, text, type }) => {
+  if (loading) return <LoadingButton />
 
   return (
     <button
-      onClick={props.onClick}
-      {...props}
-      className={NavbarButtonStyle(props.color)}
+      onClick={onClick}
+      type={type}
+      className={NavbarButtonStyle(color)}
+      // className={checkColor(color)}
     >
-      {props.text}
+      {text}
     </button>
   )
 
