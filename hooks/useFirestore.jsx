@@ -45,14 +45,14 @@ const useFirestore = () => {
 
   const removeData = async (nanoid) => {
     try {
-      setLoading(prev => ({ ...prev, deleteData: true }))
+      setLoading(prev => ({ ...prev, [nanoid]: true }))
       const docRef = doc(db, 'urls', nanoid)
       await deleteDoc(docRef)
-      setData(data.filter(item => item.id !== nanoid))
+      setData(data.filter(item => item.nanoid !== nanoid))
     } catch (err) {
       setError(err.message)
     } finally {
-      setLoading(prev => ({ ...prev, deleteData: false }))
+      setLoading(prev => ({ ...prev, [nanoid]: false }))
     }
   }
 
