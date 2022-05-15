@@ -25,13 +25,7 @@ const Register = () => {
     getValues,
     setError,
     formState: { errors }
-  } = useForm({
-    defaultValues: {
-      email: 'felipe@dev.com',
-      password: '123456',
-      repassword: '123456'
-    }
-  })
+  } = useForm()
 
   const onSubmit = async ({ email, password }) => {
     try {
