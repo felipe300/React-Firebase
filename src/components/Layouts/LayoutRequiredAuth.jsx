@@ -7,6 +7,7 @@ const LayoutRequiredAuth = () => {
   if (!user) {
     return <Navigate to='/login' />
   }
+
   return (
     <div className='container mx-auto'>
       <Outlet />

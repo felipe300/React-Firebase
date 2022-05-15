@@ -3,8 +3,9 @@ import { Routes, Route } from 'react-router-dom'
 
 import { UserContext } from './context/UserProvider'
 
-import LayoutContainer from './components/Layouts/LayoutContainer'
 import LayoutRequiredAuth from './components/Layouts/LayoutRequiredAuth'
+import LayoutContainer from './components/Layouts/LayoutContainer'
+import LayoutRedirect from './components/Layouts/LayoutRedirect'
 import Navbar from './components/Navbar'
 
 import Home from './routes/Home'
@@ -34,7 +35,9 @@ const App = () => {
           <Route path='/register' element={<Register />} />
         </Route>
 
-        <Route path='*' element={<NotFound />} />
+        <Route path='/:nanoid' element={<LayoutRedirect />}>
+          <Route index element={<NotFound />} />
+        </Route>
       </Routes>
     </>
   )
