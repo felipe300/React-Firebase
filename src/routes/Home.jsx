@@ -11,6 +11,7 @@ import { formValidate } from '../utils/formValidate'
 const Home = () => {
   const { data, error, loading, addData, getData, removeData, updateData } = useFirestore()
   const [newOrignId, setNewOriginId] = useState()
+  const [copied, setCopied] = useState({})
 
   const { required, patternUrl } = formValidate()
 
@@ -54,6 +55,13 @@ const Home = () => {
     setNewOriginId(nanoid)
   }
 
+  const handleCopyData = async (nanoid) => {
+    await navigator.clipboard.writeText(pathUrl + nanoid)
+    setCopied({ [nanoid]: true })
+  }
+
+  const pathUrl = window.location.href
+
   return (
     <>
       <Title title='Home' />
@@ -76,17 +84,20 @@ const Home = () => {
 
       </form>
       {
-        data.map(({ enabled, nanoid, origin, uid, url }) => {
+        data.map(({ nanoid, origin }) => {
           return (
-            <div key={nanoid}>
-              <p>{nanoid}</p>
-              <p>{origin}</p>
-              <p>{uid}</p>
-              <p>{url}</p>
-              <p>{enabled ? 'TRUE' : 'FALSE'}</p>
+            <div key={nanoid} className='p-6 bg-white rounded-lg border border-gray-200dark:bg-white-800 dark:border-white-700 mb-1 mt-1'>
+              <h5 className='mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:gray-white'>
+                {pathUrl}
+                {nanoid}
+              </h5>
+              <p className='mb-3 font-normal text-gray-700 dark:text-gray-500'>
+                {origin}
+              </p>
               <div className='flex space-x-3'>
                 <Button type='button' text='Remove Url' loading={loading.deleteData ? true : undefined} color='red' onClick={() => handleDeleteData(nanoid)} />
                 <Button type='button' text='Edit Url' loading={loading.updateData ? true : undefined} color='green' onClick={() => handleUpdateData(nanoid, origin)} />
+                <Button type='button' text={copied[nanoid] ? 'Copied Url' : 'Copy Url'} loading={loading.updateData ? true : undefined} color='blue' onClick={() => handleCopyData(nanoid)} />
               </div>
             </div>
           )
